@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const { userRegisterError } = require('../constants/err.type')
 const {createUser, getUserInfo, updateById} = require('../service/user.service')
+const {getSongUrlById} = require('../service/song.service')
 
 const {JWT_SECRET} = require('../config/config.default')
 class UserController {
@@ -64,6 +65,18 @@ class UserController {
       }
     }
     // 3. 返回结果
+  }
+  async log(ctx, next) {
+    console.log(ctx.request.query.songId)
+    const songId = ctx.request.query.songId
+    const res = await getSongUrlById(songId)
+    ctx.body = {
+      code: 0,
+      message: '歌曲Url获取成功',
+      result: {
+        ...res
+      }
+    }
   }
 }
 
