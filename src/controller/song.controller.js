@@ -1,4 +1,4 @@
-const { getSongUrlById, getSingerSongs } = require("../service/song.service")
+const { getSongUrlById, getSingerSongs, getSongDetailById } = require("../service/song.service")
 
 // 控制器用来写需要暴露的接口方法
 class SongController {
@@ -27,6 +27,21 @@ class SongController {
         code: 0,
         message: '歌手歌曲获取成功',
         result: [...res]
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  async getSongDetail(ctx, next) {
+    try {
+      const {songId} = ctx.request.query
+      const res = await getSongDetailById(songId)
+      ctx.body = {
+        code: 0,
+        message: '歌曲详情获取成功',
+        result: {
+          ...res
+        }
       }
     } catch (e) {
       console.log(e)
