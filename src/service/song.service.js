@@ -27,6 +27,11 @@ class SongService {
     return res ? res.dataValues : null
   }
 
+  async searchSongByKeywords(keywords) {
+    const res = await Song.sequelize.query(`SELECT name, songId, songer FROM song_list WHERE name = "${keywords}" or songer = "${keywords}"`, { type: QueryTypes.SELECT })
+    return res
+  }
+
 }
 
 module.exports = new SongService()

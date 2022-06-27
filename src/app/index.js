@@ -6,6 +6,7 @@ const userRouter = require('../router/user.route')
 const songRouter = require('../router/song.route')
 const playlistRouter = require('../router/playlist.route')
 const singerRouter = require('../router/singer.route')
+const bannerRouter = require('../router/banner.route')
 const app = new Koa()
 
 app
@@ -14,6 +15,7 @@ app
   .use(songRouter.routes())
   .use(playlistRouter.routes())
   .use(singerRouter.routes())
+  .use(bannerRouter.routes())
 
 // 统一的错误处理
 app.on('error', errHandler)
